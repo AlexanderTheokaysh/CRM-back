@@ -35,7 +35,6 @@ public class AuthenticationController {
     private  UserService userService;
     @Autowired
     private  AuthenticationManager authenticationManager;
-
     @Autowired
     public void UserAuthController(@Qualifier("customAuthenticationManager") AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;

@@ -1,6 +1,6 @@
 package CRM.dto;
 
-import CRM.domain.LoanEntity;
+import CRM.domain.LeadEntity;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 
@@ -11,5 +11,5 @@ import java.math.BigDecimal;
 public class LoansWithoutCallDateQueryDTO {
 
     BigDecimal totalAmount;
-    Page<LoanEntity> loanEntities;
+    Page<LeadEntity> leadEntities;
 }

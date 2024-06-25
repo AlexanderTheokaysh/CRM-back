@@ -1,8 +1,6 @@
 package CRM.service;
 
-import CRM.repository.AttachedFileRepository;
 import CRM.config.FileConfig;
-import CRM.domain.AttachedFileEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -27,10 +25,8 @@ public class FileServiceBean implements FileService {
 
     private final FileReaderService fileReaderService;
 
-    private final AttachedFileRepository attachedFileRepository;
-    private final AttachedFileService attachedFileService;
 
-    private final LoanService loanService;
+    private final LeadService leadService;
 
     @Override
     public List<String> getUploadedFileNames() {
@@ -55,29 +51,29 @@ public class FileServiceBean implements FileService {
 
             String[] names = originalName.split("\\.");
 
-            AttachedFileEntity entity = AttachedFileEntity.builder()
-                    .name(name)
-                    .loanId(id)
-                    .uploadingFileName(originalName)
-                    .build();
+//            AttachedFileEntity entity = AttachedFileEntity.builder()
+//                    .name(name)
+//                    .loanId(id)
+//                    .uploadingFileName(originalName)
+//                    .build();
+//
+//
+//            entity = attachedFileService.edit(entity);
+//
+//            String filename = entity.getId() + "." + names[1];
+//
+//
+//            String filePath = fileConfig.getFolderPath() + "/" + filename;
+//
+//            entity.setOriginalFileName(filename);
+//
+//            attachedFileService.edit(entity);
 
+//            File file = new File(filePath);
 
-            entity = attachedFileService.edit(entity);
-
-            String filename = entity.getId() + "." + names[1];
-
-
-            String filePath = fileConfig.getFolderPath() + "/" + filename;
-
-            entity.setOriginalFileName(filename);
-
-            attachedFileService.edit(entity);
-
-            File file = new File(filePath);
-
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(multipartFile.getBytes());
-            fos.close();
+//            FileOutputStream fos = new FileOutputStream(file);
+//            fos.write(multipartFile.getBytes());
+//            fos.close();
 
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);

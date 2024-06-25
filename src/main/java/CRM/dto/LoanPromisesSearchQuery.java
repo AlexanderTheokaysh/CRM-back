@@ -1,8 +1,6 @@
 package CRM.dto;
 
-import CRM.domain.LoanEntity;
 import lombok.Data;
-import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 
@@ -10,5 +8,5 @@ import java.math.BigDecimal;
 public class LoanPromisesSearchQuery {
     BigDecimal totalAmount;
     BigDecimal totalPromiseAmount;
-    Page<LoanEntity> loanEntities;
+//    Page<LoanEntity> loanEntities;
 }

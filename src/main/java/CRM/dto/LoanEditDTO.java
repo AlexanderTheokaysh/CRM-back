@@ -1,12 +1,12 @@
 package CRM.dto;
 
-import CRM.domain.LoanEntity;
+import CRM.domain.LeadEntity;
 import lombok.Data;
 
 @Data
 public class LoanEditDTO {
 
-    private LoanEntity loanEntity;
+    private LeadEntity leadEntity;
 
     private String assignedEmployeeId;
 

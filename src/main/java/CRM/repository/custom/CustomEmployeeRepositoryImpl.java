@@ -28,10 +28,6 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
             if (StringUtils.isNotBlank(fields.getLastName())) {
                 sb.append("AND t.lastName like '%" + fields.getLastName() + "%' ");
             }
-            if (StringUtils.isNotBlank(fields.getPersonalNumber())) {
-                sb.append("AND t.personalNumber = '" + fields.getPersonalNumber() + "' ");
-            }
-
         }
 
         TypedQuery<EmployeeEntity> query = em.createQuery(sb.toString(), EmployeeEntity.class);

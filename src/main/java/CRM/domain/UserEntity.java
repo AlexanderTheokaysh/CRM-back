@@ -26,9 +26,13 @@ public class UserEntity {
     @Column(name = "CREATE_DATE")
     private Date createDate;
 
+    @Column(name = "LAST_LOGIN")
+    private Date lastLogin;
+
     @Column(name = "DEACTIVATE_DATE")
     private Date deactivateDate;
 
     @OneToOne
     private EmployeeEntity employeeEntity;
+
 }

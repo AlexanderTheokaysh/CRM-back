@@ -1,8 +1,6 @@
 package CRM.dto;
 
-import CRM.domain.LoanEntity;
 import lombok.Data;
-import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 
@@ -12,5 +10,5 @@ public class LoanPaymentsSearchQuery {
      BigDecimal paymentCount;
      BigDecimal withCheckAmount;
      BigDecimal totalExtraPaid;
-     Page<LoanEntity> loanEntities;
+//     Page<LoanEntity> loanEntities;
 }

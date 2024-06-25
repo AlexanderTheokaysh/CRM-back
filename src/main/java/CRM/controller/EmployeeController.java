@@ -22,20 +22,6 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getVisitors", method = RequestMethod.POST)
-    @CrossOrigin
-    public List<EmployeeEntity> getVisitors() {
-        List<EmployeeEntity> visitors = employeeService.getVisitors();
-        return visitors;
-    }
-
-    @RequestMapping(value = "/getAgents", method = RequestMethod.POST)
-    @CrossOrigin
-    public List<EmployeeEntity> getAgents() {
-        return employeeService.getAgents();
-    }
-
-
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public EmployeeEntity edit(@RequestBody EmployeeEntity employeeEntity) {
@@ -59,7 +45,6 @@ public class EmployeeController {
         EmployeeEntity searchParams = EmployeeEntity.builder()
                 .firstName(firstName)
                 .lastName(lastName)
-                .personalNumber(personalNumber)
                 .build();
         return employeeService.find(searchParams, limit, offset);
     }
