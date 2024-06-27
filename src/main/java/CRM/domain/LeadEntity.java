@@ -1,9 +1,21 @@
 package CRM.domain;
 
 import lombok.*;
+import org.hibernate.HibernateException;
+import org.hibernate.MappingException;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
+import org.hibernate.internal.util.config.ConfigurationHelper;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.type.StringType;
+import org.hibernate.type.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 
 @Getter
 @Setter
@@ -13,6 +25,33 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class LeadEntity {
+    public static class StringPrefixedSequenceIdGenerator extends SequenceStyleGenerator {
+
+        public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
+        public static final String VALUE_PREFIX_DEFAULT = "1";
+        private String valuePrefix;
+
+        public static final String NUMBER_FORMAT_PARAMETER = "numberFormat";
+        public static final String NUMBER_FORMAT_DEFAULT = "%d";
+        private String numberFormat;
+
+        @Override
+        public Serializable generate(SharedSessionContractImplementor session,
+                                     Object object) throws HibernateException {
+            return valuePrefix
+                    + String.format(numberFormat, super.generate(session, object));
+        }
+
+        @Override
+        public void configure(Type type, Properties params,
+                              ServiceRegistry serviceRegistry) throws MappingException {
+            super.configure(StringType.INSTANCE, params, serviceRegistry);
+            valuePrefix = ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER,
+                    params, VALUE_PREFIX_DEFAULT);
+            numberFormat = ConfigurationHelper.getString(NUMBER_FORMAT_PARAMETER,
+                    params, NUMBER_FORMAT_DEFAULT);
+        }
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +63,17 @@ public class LeadEntity {
     @Column(name = "lastname")
     private String lastname;
 
-
     @Column(name = "email")
     private String email;
 
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "test_seq")
+    @GenericGenerator(name = "test_seq", strategy = "StringPrefixedSequenceIdGenerator", parameters = {
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "5"),
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INITIAL_PARAM, value = "0"),
+            @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-hi")})
     @Column(name = "UID")
-    private String uid;
+    public String uid;
 
 
     @Column(name = "phone")
@@ -46,15 +89,15 @@ public class LeadEntity {
     @Column(name = "is_online")
     private Boolean isOnline;
 
-    @ManyToOne
-    @Column(name = "assigned_to")
-    private EmployeeEntity assignedTo;
+//    @ManyToOne
+//    private EmployeeEntity assignedTo;
 
     @Column(name = "trades")
     private String trades;
 
-    @Column(name = "comments")
-    private String comments;
+    @OneToMany
+    @JoinColumn(name = "LEAD_ID")
+    private List<LeadCommentEntity> comments;
 
     @Column(name = "account")
     private String account;
