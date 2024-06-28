@@ -17,6 +17,9 @@ public class LeadCommentEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "lead_id")
+    private Long leadId;
+
     @Column(name = "comment", length = 2000)
     private String comment;
 
@@ -26,7 +29,5 @@ public class LeadCommentEntity {
     @Column(name = "author")
     private String author;
 
-    @ManyToOne
-    private LeadCommentEntity lead;
 
 }
