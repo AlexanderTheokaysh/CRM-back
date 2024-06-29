@@ -23,4 +23,19 @@ public class LeadCommentController {
         return ResponseEntity.ok(comment);
     }
 
+    @PostMapping("edit")
+    public ResponseEntity<LeadCommentEntity> edit(@RequestBody LeadCommentEntity comment) {
+        comment = leadCommentService.edit(comment);
+        return ResponseEntity.ok(comment);
+    }
+
+    @PostMapping("remove")
+    public ResponseEntity<LeadCommentEntity> delete(@RequestBody LeadCommentEntity comment) {
+        comment = leadCommentService.delete(comment);
+        return ResponseEntity.ok(comment);
+    }
+
+
+
+
 }

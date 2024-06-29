@@ -10,6 +10,8 @@ public interface LeadCommentService {
 
     LeadCommentEntity edit(LeadCommentEntity entity);
 
+    LeadCommentEntity delete(LeadCommentEntity entity);
+
     List<LeadCommentEntity> list();
 
 }

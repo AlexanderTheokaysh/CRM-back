@@ -1,10 +1,10 @@
 package CRM.repository;
 
-import CRM.domain.LeadEntity;
+import CRM.domain.LeadCommentEntity;
 import org.springframework.data.repository.CrudRepository;
 
 
-public interface LeadCommentRepository extends CrudRepository<LeadEntity, Long> {
+public interface LeadCommentRepository extends CrudRepository<LeadCommentEntity, Long> {
 
 
 }
