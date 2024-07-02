@@ -26,8 +26,8 @@ import java.util.Properties;
 @Builder
 public class ClientEntity {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @OneToMany
@@ -44,12 +44,10 @@ public class ClientEntity {
     private String email;
 
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "test_seq")
-    @GenericGenerator(name = "test_seq", strategy = "StringPrefixedSequenceIdGenerator", parameters = {
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "5"),
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INITIAL_PARAM, value = "0"),
-            @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-hi")})
-    @Column(name = "UID")
+    @Id
+    @GeneratedValue(generator = "CustomClientIDGenerator", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "CustomClientIDGenerator", strategy = "CRM.utils.CustomClientIDGenerator")
+    @Column(name = "UID", nullable = false)
     public String uid;
 
 
