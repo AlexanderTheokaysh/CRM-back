@@ -59,4 +59,7 @@ public class LeadEntity {
 
     @Column(name = "deposit")
     private Boolean deposit;
+
+    @ManyToOne
+    private StatusEntity status;
 }
