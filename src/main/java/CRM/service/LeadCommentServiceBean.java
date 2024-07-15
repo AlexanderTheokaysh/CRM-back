@@ -3,6 +3,7 @@ package CRM.service;
 import CRM.domain.LeadCommentEntity;
 import CRM.repository.LeadCommentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LeadCommentServiceBean implements LeadCommentService {
 
+    @Autowired
     LeadCommentRepository leadCommentRepository;
 
     @Override
@@ -31,8 +33,8 @@ public class LeadCommentServiceBean implements LeadCommentService {
     }
 
     @Override
-    public List<LeadCommentEntity> list() {
-        return List.of();
+    public List<LeadCommentEntity> getLeadComments(Long id) {
+        return leadCommentRepository.findLeadCommentEntitiesByLeadId(id);
     }
 
 }

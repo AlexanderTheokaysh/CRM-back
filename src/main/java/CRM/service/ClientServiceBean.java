@@ -1,6 +1,8 @@
 package CRM.service;
 
-import CRM.domain.*;
+import CRM.domain.ClientEntity;
+import CRM.domain.EmployeeEntity;
+import CRM.domain.UserEntity;
 import CRM.dto.LoanSearchQuery;
 import CRM.repository.ClientRepository;
 import CRM.repository.UserRepository;
@@ -9,12 +11,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +33,25 @@ public class ClientServiceBean implements ClientService {
 
     @Override
     public ClientEntity get(Long clientId) {
-        Optional<ClientEntity> optionalClientEntity = clientRepository.findById(Math.toIntExact(clientId));
+        Optional<ClientEntity> optionalClientEntity = clientRepository.findClientEntityById(clientId);
         return new TemplateUtil<ClientEntity>().get(optionalClientEntity);
+    }
+
+    @Override
+    public ClientEntity add(ClientEntity client) {
+        String prefix = "C ";
+        Pageable lastPaging = PageRequest.of(0, 1, Sort.by("id").descending());
+
+        Page<ClientEntity> lastClient = clientRepository.getLastRecord(lastPaging);
+        List<ClientEntity> clients = lastClient.getContent();
+        if (clients.size() != 0) {
+            int number = parseInt(clients.get(0).getUid().substring(prefix.length())) + 1;
+            client.setUid(prefix + number);
+        } else {
+            client.setUid("C 1");
+        }
+
+        return clientRepository.save(client);
     }
 
     @Override

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "client_this_month")
+@Table(name = "user_monthly_report")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,4 +25,12 @@ public class UserThisMonthEntity {
 
     @Column(name = "ftd_amount")
     private Long ftdAmount;
+
+    @Column(name = "month")
+    private String month;
+
+    @Column(name = "upsaleAmount")
+    private Long upsaleAmount;
+
+
 }

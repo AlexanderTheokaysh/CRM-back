@@ -10,6 +10,9 @@ public interface ClientService {
 
     ClientEntity get(Long id);
 
+    ClientEntity add(ClientEntity client);
+
+
     ClientEntity edit(ClientEntity client);
 
     Page<ClientEntity> page(Integer start,

@@ -1,7 +1,6 @@
 package CRM.domain;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,12 +15,13 @@ import java.util.List;
 @Builder
 public class ClientEntity {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "CLIENT_ID")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="client_id")
     private List<ClientCommentEntity> comments;
 
     @Column(name = "name")
@@ -33,13 +33,8 @@ public class ClientEntity {
     @Column(name = "email")
     private String email;
 
-
-    @Id
-    @GeneratedValue(generator = "CustomClientIDGenerator", strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "CustomClientIDGenerator", strategy = "CRM.utils.CustomClientIDGenerator")
     @Column(name = "UID", nullable = false)
     public String uid;
-
 
     @Column(name = "phone")
     private String phone;

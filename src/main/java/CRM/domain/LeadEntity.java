@@ -1,7 +1,6 @@
 package CRM.domain;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,14 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class LeadEntity {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "LEAD_ID")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="lead_id")
     private List<LeadCommentEntity> comments;
 
     @Column(name = "name")
@@ -33,9 +34,6 @@ public class LeadEntity {
     @Column(name = "email")
     private String email;
 
-    @Id
-    @GeneratedValue(generator = "CustomLeadIDGenerator", strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "CustomLeadIDGenerator", strategy = "CRM.utils.CustomLeadIDGenerator")
     @Column(name = "UID", nullable = false)
     public String uid;
 

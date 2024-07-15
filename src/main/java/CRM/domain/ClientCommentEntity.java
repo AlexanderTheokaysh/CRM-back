@@ -3,6 +3,7 @@ package CRM.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -12,7 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ClientCommentEntity {
+@Data
+public class ClientCommentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

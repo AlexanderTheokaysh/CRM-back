@@ -2,7 +2,6 @@ package CRM.service;
 
 import CRM.domain.LeadEntity;
 import CRM.dto.LoanSearchQuery;
-import CRM.dto.ReassignLoansDTO;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
@@ -10,6 +9,8 @@ import java.math.BigDecimal;
 public interface LeadService {
 
     LeadEntity get(Long id);
+
+    LeadEntity add(LeadEntity lead);
 
     LeadEntity edit(LeadEntity lead);
 

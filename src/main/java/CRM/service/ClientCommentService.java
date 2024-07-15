@@ -14,5 +14,7 @@ public interface ClientCommentService {
 
     List<ClientCommentEntity> list();
 
+    List<ClientCommentEntity> getClientComments(Long id);
+
 }
 

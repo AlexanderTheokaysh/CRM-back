@@ -1,7 +1,9 @@
 package CRM.controller;
 
+import CRM.domain.LeadCommentEntity;
 import CRM.domain.LeadEntity;
 import CRM.service.EmployeeService;
+import CRM.service.LeadCommentService;
 import CRM.service.LeadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("lead")
 @Slf4j
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class LeadController {
 
     private final LeadService leadService;
+    private final LeadCommentService leadCommentService;
 
     @Autowired
     UserDetailsService userDetailsService;
@@ -34,7 +39,7 @@ public class LeadController {
 
     @PostMapping("add")
     public ResponseEntity<LeadEntity> add(@RequestBody LeadEntity lead) {
-        lead = leadService.edit(lead);
+        lead = leadService.add(lead);
         return ResponseEntity.ok(lead);
     }
 
@@ -42,9 +47,17 @@ public class LeadController {
     @CrossOrigin
     public ResponseEntity<LeadEntity> edit(@RequestBody LeadEntity lead) {
 
+        List<LeadCommentEntity> comments = leadCommentService.getLeadComments(lead.getId());
+
+        if (lead != null) {
+            lead.setComments(comments);
+        }
+
+        lead = leadService.edit(lead);
 
         LeadEntity editedLead = leadService.edit(lead);
         return ResponseEntity.ok(editedLead);
+
     }
 
 
@@ -53,6 +66,4 @@ public class LeadController {
         Page<LeadEntity> leadEntities = leadService.page(start, limit);
         return ResponseEntity.ok(leadEntities);
     }
-
-
 }

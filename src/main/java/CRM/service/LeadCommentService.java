@@ -12,7 +12,7 @@ public interface LeadCommentService {
 
     LeadCommentEntity delete(LeadCommentEntity entity);
 
-    List<LeadCommentEntity> list();
+    List<LeadCommentEntity> getLeadComments(Long id);
 
 }
 

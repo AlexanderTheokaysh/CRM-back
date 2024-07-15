@@ -12,12 +12,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,24 @@ public class LeadServiceBean implements LeadService {
     private final UserRepository userRepository;
 
     private final LeadSortingRepository loanSortingRepository;
+
+
+    @Override
+    public LeadEntity add(LeadEntity lead) {
+        String prefix = "L ";
+        Pageable lastPaging = PageRequest.of(0, 1, Sort.by("id").descending());
+
+        Page<LeadEntity> lastLead = leadRepository.getLastRecord(lastPaging);
+        List<LeadEntity> leads = lastLead.getContent();
+        if (leads.size() != 0) {
+            int number = parseInt(leads.get(0).getUid().substring(prefix.length())) + 1;
+            lead.setUid(prefix + number);
+        } else {
+            lead.setUid("L 1");
+        }
+
+        return leadRepository.save(lead);
+    }
 
     @Override
     public LeadEntity get(Long loanId) {
