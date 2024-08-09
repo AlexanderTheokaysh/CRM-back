@@ -10,7 +10,9 @@ import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
-    Page<ClientEntity> findAll(Pageable paging);
+
+    @Query("SELECT c FROM ClientEntity c WHERE :name IS null OR c.name LIKE %:name%")
+    Page<ClientEntity> findClients(String name, Pageable paging);
 
     Optional<ClientEntity> findClientEntityById(Long id);
 

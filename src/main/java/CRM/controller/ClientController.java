@@ -51,10 +51,9 @@ public class ClientController {
 
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ResponseEntity<Page<ClientEntity>> page(Integer limit, Integer start) {
-        Page<ClientEntity> clientEntities = clientService.page(start, limit);
+    public ResponseEntity<Page<ClientEntity>> page(@RequestParam(required = false) String name, Integer limit, Integer start) {
+        Page<ClientEntity> clientEntities = clientService.page(name, start, limit);
         return ResponseEntity.ok(clientEntities);
     }
-
 
 }

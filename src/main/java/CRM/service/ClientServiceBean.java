@@ -60,10 +60,10 @@ public class ClientServiceBean implements ClientService {
     }
 
     @Override
-    public Page<ClientEntity> page(Integer start, Integer limit) {
+    public Page<ClientEntity> page(String name, Integer start, Integer limit) {
         Pageable paging = PageRequest.of(start, limit);
 
-        return clientRepository.findAll(paging);
+        return clientRepository.findClients(name, paging);
     }
 
 

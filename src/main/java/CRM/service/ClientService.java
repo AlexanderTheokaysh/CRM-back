@@ -15,8 +15,9 @@ public interface ClientService {
 
     ClientEntity edit(ClientEntity client);
 
-    Page<ClientEntity> page(Integer start,
-                          Integer limit);
+    Page<ClientEntity> page(String name,
+                            Integer start,
+                            Integer limit);
 
     LoanSearchQuery getAssignRequestLoans(Integer start, Integer limit, String id, String assignRequestReason, String creditor, String debtor, String debtorIdentificator, String assignedAgent, BigDecimal amount, Boolean nullified, Boolean nullificationRequest, Boolean archived);
 
