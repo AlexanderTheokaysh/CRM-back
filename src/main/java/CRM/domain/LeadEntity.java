@@ -52,11 +52,17 @@ public class LeadEntity {
     @Column(name = "country")
     private String country;
 
-//    @ManyToOne
-//    private EmployeeEntity assignedTo;
+    @ManyToOne
+    private EmployeeEntity assignedTo;
 
     @Column(name = "deposit")
     private Boolean deposit;
+
+    @Column(name = "affiliation")
+    private String affiliation;
+
+    @Column(name = "source")
+    private String source;
 
     @ManyToOne
     private StatusEntity status;

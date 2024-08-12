@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -51,8 +52,19 @@ public class ClientController {
 
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ResponseEntity<Page<ClientEntity>> page(@RequestParam(required = false) String name, Integer limit, Integer start) {
-        Page<ClientEntity> clientEntities = clientService.page(name, start, limit);
+    public ResponseEntity<Page<ClientEntity>> page(@RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) String lastname,
+                                                   @RequestParam(required = false) String uid,
+                                                   @RequestParam(required = false) String phone,
+                                                   @RequestParam(required = false) String mail,
+                                                   @RequestParam(required = false) Date registerDateFrom,
+                                                   @RequestParam(required = false) Date registerDateTo,
+                                                   @RequestParam(required = false) Long status,
+                                                   @RequestParam(required = false) Long assignedAgent,
+                                                   @RequestParam(required = false) Boolean gender,
+                                                   @RequestParam(required = false) String country,
+                                                   Integer limit, Integer start) {
+        Page<ClientEntity> clientEntities = clientService.page(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, status, assignedAgent, gender, country, start, limit);
         return ResponseEntity.ok(clientEntities);
     }
 

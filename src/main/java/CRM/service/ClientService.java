@@ -5,6 +5,7 @@ import CRM.dto.LoanSearchQuery;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public interface ClientService {
 
@@ -16,6 +17,16 @@ public interface ClientService {
     ClientEntity edit(ClientEntity client);
 
     Page<ClientEntity> page(String name,
+                            String lastname,
+                            String uid,
+                            String phone,
+                            String mail,
+                            Date registerDateFrom,
+                            Date registerDateTo,
+                            Long status,
+                            Long assignedAgent,
+                            Boolean gender,
+                            String country,
                             Integer start,
                             Integer limit);
 

@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,10 +61,22 @@ public class ClientServiceBean implements ClientService {
     }
 
     @Override
-    public Page<ClientEntity> page(String name, Integer start, Integer limit) {
+    public Page<ClientEntity> page(String name,
+                                   String lastname,
+                                   String uid,
+                                   String phone,
+                                   String mail,
+                                   Date registerDateFrom,
+                                   Date registerDateTo,
+                                   Long status,
+                                   Long assignedAgent,
+                                   Boolean gender,
+                                   String country,
+                                   Integer start,
+                                   Integer limit) {
         Pageable paging = PageRequest.of(start, limit);
 
-        return clientRepository.findClients(name, paging);
+        return clientRepository.findClients(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, status, assignedAgent, gender, country, paging);
     }
 
 

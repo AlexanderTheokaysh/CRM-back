@@ -21,7 +21,7 @@ public class ClientEntity {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="client_id")
+    @JoinColumn(name = "client_id")
     private List<ClientCommentEntity> comments;
 
     @Column(name = "name")
@@ -51,8 +51,8 @@ public class ClientEntity {
     @Column(name = "is_online")
     private Boolean isOnline;
 
-//    @ManyToOne
-//    private EmployeeEntity assignedTo;
+    @ManyToOne
+    private EmployeeEntity assignedTo;
 
     @Column(name = "trades")
     private String trades;
@@ -63,8 +63,15 @@ public class ClientEntity {
     @Column(name = "personal_data")
     private String personalData;
 
+    @Column(name = "affiliation")
+    private String affiliation;
+
+    @Column(name = "source")
+    private String source;
+
     @Column(name = "deposit")
     private Boolean deposit;
+
 
     @Column(name = "last_online")
     private Date lastOnline;
