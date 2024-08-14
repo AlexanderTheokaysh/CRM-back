@@ -3,30 +3,31 @@ package CRM.repository;
 import CRM.domain.ClientEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Date;
 import java.util.Optional;
 
-public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
+public interface ClientRepository extends PagingAndSortingRepository<ClientEntity, Long> {
 
 
-    @Query("SELECT c FROM ClientEntity c WHERE :name IS null OR c.name LIKE %:name% AND " +
-            ":uid is null OR c.uid = :uid AND " +
-            ":phone is null OR c.phone LIKE %:phone AND " +
-            ":mail is null OR c.email LIKE %:mail% AND " +
-            ":name IS NULL OR (CONCAT(c.name,c.lastname) LIKE %:name% OR c.name LIKE %:lastname%) AND " +
-            ":registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo AND " +
-            ":status is null or c.status = :status AND " +
-            ":assignedAgent is null or c.assignedTo = :assignedAgent AND " +
-            ":gender is null or c.gender = :gender AND " +
-            ":country is null or c.country = :country")
+    @Query("SELECT c FROM ClientEntity c WHERE " +
+            "(:name IS null OR c.name LIKE %:name%) AND " +
+            "(:uid is null OR c.uid = :uid) AND " +
+            "(:phone is null OR c.phone LIKE %:phone) AND " +
+            "(:mail is null OR c.email LIKE %:mail%) AND " +
+            "(:lastname IS NULL OR c.lastname LIKE %:lastname) AND " +
+            "(:registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
+            "(:status is null or c.status = :status) AND " +
+            "(:assignedAgent is null or c.assignedTo = :assignedAgent) AND " +
+            "(:gender is null or c.gender = :gender) AND " +
+            "(:country is null or c.country = :country)")
     Page<ClientEntity> findClients(String name,
-                                   String lastname,
                                    String uid,
                                    String phone,
                                    String mail,
+                                   String lastname,
                                    Date registerDateFrom,
                                    Date registerDateTo,
                                    Long status,

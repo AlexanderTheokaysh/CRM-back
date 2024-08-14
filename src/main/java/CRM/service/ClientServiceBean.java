@@ -76,7 +76,7 @@ public class ClientServiceBean implements ClientService {
                                    Integer limit) {
         Pageable paging = PageRequest.of(start, limit);
 
-        return clientRepository.findClients(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, status, assignedAgent, gender, country, paging);
+        return clientRepository.findClients(name, uid,phone, mail,lastname,   registerDateFrom, registerDateTo, status, assignedAgent, gender, country, paging);
     }
 
 
