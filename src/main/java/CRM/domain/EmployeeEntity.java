@@ -34,5 +34,4 @@ public class EmployeeEntity implements Serializable {
     @Column(name = "EMAIL", length = 100)
     private String email;
 
-
 }

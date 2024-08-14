@@ -10,6 +10,8 @@ public interface UserService {
 
     UserEntity get(Long id);
 
+    UserEntity createNewUser(UserEntity user);
+
     UserEntity edit(UserEntity entity);
 
     List<UserEntity> list();

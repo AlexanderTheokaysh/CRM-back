@@ -1,7 +1,7 @@
 package CRM.service;
 
-import CRM.repository.UserRepository;
 import CRM.domain.UserEntity;
+import CRM.repository.UserRepository;
 import CRM.utils.TemplateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,12 @@ public class UserServiceBean implements UserService {
     @Override
     public void delete(Long employeeId) {
 
+    }
+
+
+    @Override
+    public UserEntity createNewUser(UserEntity user) {
+        return userRepository.save(user);
     }
 
 }

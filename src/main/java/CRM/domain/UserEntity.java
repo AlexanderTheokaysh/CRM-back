@@ -1,6 +1,9 @@
 package CRM.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +11,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "SYSTEM_USER")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserEntity {
 
     @Id
