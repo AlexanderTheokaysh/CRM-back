@@ -12,14 +12,15 @@ import java.util.Optional;
 public interface ClientRepository extends PagingAndSortingRepository<ClientEntity, Long> {
 
 
-    @Query("SELECT c FROM ClientEntity c WHERE " +
+    @Query("SELECT c FROM ClientEntity c left join " +
+            "StatusEntity s on c.status.id = s.id WHERE " +
             "(:name IS null OR c.name LIKE %:name%) AND " +
             "(:uid is null OR c.uid = :uid) AND " +
             "(:phone is null OR c.phone LIKE %:phone) AND " +
             "(:mail is null OR c.email LIKE %:mail%) AND " +
             "(:lastname IS NULL OR c.lastname LIKE %:lastname) AND " +
             "(:registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
-            "(:status is null or c.status = :status) AND " +
+            "(:status is null or c.status.id = :status) AND " +
             "(:assignedAgent is null or c.assignedTo = :assignedAgent) AND " +
             "(:gender is null or c.gender = :gender) AND " +
             "(:country is null or c.country = :country)")
