@@ -13,7 +13,7 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
 
 
     @Query("SELECT c FROM ClientEntity c left join " +
-            "StatusEntity s on c.status.id = s.id  join " +
+            "StatusEntity s on c.status.id = s.id  left join " +
             "EmployeeEntity e on e.id = c.assignedTo.id where " +
             "(:name IS null OR c.name LIKE %:name%) AND " +
             "(:uid is null OR c.uid = :uid) AND " +
