@@ -25,8 +25,9 @@ public interface ClientService {
                             Date registerDateTo,
                             Long status,
                             Long assignedAgent,
-                            Boolean gender,
+                            String gender,
                             String country,
+                            Long team,
                             Integer start,
                             Integer limit);
 

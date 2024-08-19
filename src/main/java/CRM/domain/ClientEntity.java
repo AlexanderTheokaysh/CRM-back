@@ -42,6 +42,9 @@ public class ClientEntity {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "country_code")
+    private String countryCode;
+
     @Column(name = "gender")
     private String gender;
 
@@ -72,10 +75,11 @@ public class ClientEntity {
     @Column(name = "deposit")
     private Boolean deposit;
 
-
     @Column(name = "last_online")
     private Date lastOnline;
 
     @ManyToOne
     private StatusEntity status;
+
+
 }

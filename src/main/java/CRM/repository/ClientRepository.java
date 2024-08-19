@@ -13,7 +13,8 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
 
 
     @Query("SELECT c FROM ClientEntity c left join " +
-            "StatusEntity s on c.status.id = s.id WHERE " +
+            "StatusEntity s on c.status.id = s.id  join " +
+            "EmployeeEntity e on e.id = c.assignedTo.id where " +
             "(:name IS null OR c.name LIKE %:name%) AND " +
             "(:uid is null OR c.uid = :uid) AND " +
             "(:phone is null OR c.phone LIKE %:phone) AND " +
@@ -21,9 +22,10 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
             "(:lastname IS NULL OR c.lastname LIKE %:lastname) AND " +
             "(:registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
             "(:status is null or c.status.id = :status) AND " +
-            "(:assignedAgent is null or c.assignedTo = :assignedAgent) AND " +
+            "(:assignedAgent is null or e.id = :assignedAgent) AND " +
             "(:gender is null or c.gender = :gender) AND " +
-            "(:country is null or c.country = :country)")
+            "(:country is null or c.country = :country) AND " +
+            "(:team is null or e.teamId = :team)")
     Page<ClientEntity> findClients(String name,
                                    String uid,
                                    String phone,
@@ -33,8 +35,9 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
                                    Date registerDateTo,
                                    Long status,
                                    Long assignedAgent,
-                                   Boolean gender,
+                                   String gender,
                                    String country,
+                                   Long team,
                                    Pageable paging);
 
 

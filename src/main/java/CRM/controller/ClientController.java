@@ -59,12 +59,27 @@ public class ClientController {
                                                    @RequestParam(required = false) String mail,
                                                    @RequestParam(required = false) Date registerDateFrom,
                                                    @RequestParam(required = false) Date registerDateTo,
-                                                   @RequestParam(required = false) Long status,
-                                                   @RequestParam(required = false) Long assignedAgent,
-                                                   @RequestParam(required = false) Boolean gender,
+                                                   @RequestParam(required = false) Integer status,
+                                                   @RequestParam(required = false) Integer assignedAgent,
+                                                   @RequestParam(required = false) String gender,
                                                    @RequestParam(required = false) String country,
+                                                   @RequestParam(required = false) Integer team,
                                                    Integer limit, Integer start) {
-        Page<ClientEntity> clientEntities = clientService.page(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, status, assignedAgent, gender, country, start, limit);
+
+        Long convStatus = null;
+        Long convAssignedAgent = null;
+        Long convTeam = null;
+
+        if (status != null) {
+            convStatus = Long.valueOf(status);
+        }
+        if (assignedAgent != null) {
+            convAssignedAgent = Long.valueOf(assignedAgent);
+        }
+        if (team != null) {
+            convTeam = Long.valueOf(team);
+        }
+        Page<ClientEntity> clientEntities = clientService.page(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, convStatus, convAssignedAgent, gender, country, convTeam, start, limit);
         return ResponseEntity.ok(clientEntities);
     }
 

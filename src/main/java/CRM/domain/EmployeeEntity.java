@@ -1,13 +1,11 @@
 package CRM.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -15,8 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonSerialize
-public class EmployeeEntity implements Serializable {
+public class EmployeeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,5 +30,8 @@ public class EmployeeEntity implements Serializable {
 
     @Column(name = "EMAIL", length = 100)
     private String email;
+
+    @Column(name = "TEAM_ID")
+    private Long teamId;
 
 }
