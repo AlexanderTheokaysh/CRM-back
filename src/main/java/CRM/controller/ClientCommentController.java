@@ -39,10 +39,7 @@ public class ClientCommentController {
     }
 
     @PostMapping("remove")
-    public ResponseEntity<ClientCommentEntity> delete(@RequestBody ClientCommentEntity comment) {
-        comment = clientCommentService.delete(comment);
-        return ResponseEntity.ok(comment);
-    }
+    public void delete(@RequestParam Long id) {clientCommentService.delete(clientCommentService.get(id));}
 
 
 }
