@@ -28,7 +28,7 @@ public class TeamController {
         return ResponseEntity.ok(team);
     }
 
-    @PostMapping("list")
+    @GetMapping("list")
     public ResponseEntity<List<TeamEntity>> list() {
         return ResponseEntity.ok(teamService.list());
     }
