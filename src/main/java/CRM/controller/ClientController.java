@@ -60,6 +60,7 @@ public class ClientController {
                                                    @RequestParam(required = false) String uid,
                                                    @RequestParam(required = false) String phone,
                                                    @RequestParam(required = false) String mail,
+                                                   @RequestParam(required = false) String affiliation,
                                                    @RequestParam(required = false) String regDateFrom,
                                                    @RequestParam(required = false) String regDateTo,
                                                    @RequestParam(required = false) Integer status,
@@ -92,7 +93,7 @@ public class ClientController {
 
         }
 
-        Page<ClientEntity> clientEntities = clientService.page(name, lastname, uid, phone, mail, registerDateFrom, registerDateTo, convStatus, convAssignedAgent, gender, country, convTeam, start, limit);
+        Page<ClientEntity> clientEntities = clientService.page(name, lastname, uid, phone, mail, affiliation, registerDateFrom, registerDateTo, convStatus, convAssignedAgent, gender, country, convTeam, start, limit);
         return ResponseEntity.ok(clientEntities);
     }
 

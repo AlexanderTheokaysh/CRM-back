@@ -21,6 +21,7 @@ public interface ClientService {
                             String uid,
                             String phone,
                             String mail,
+                            String affiliation,
                             Date registerDateFrom,
                             Date registerDateTo,
                             Long status,
