@@ -19,7 +19,7 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
             "(:uid is null OR c.uid = :uid) AND " +
             "(:phone is null OR c.phone LIKE %:phone) AND " +
             "(:mail is null OR c.email LIKE %:mail%) AND " +
-            "(:affiliate is null OR c.affiliation LIKE %:affiliation%) AND " +
+            "(:affiliation is null OR c.affiliation LIKE %:affiliation%) AND " +
             "(:lastname IS NULL OR c.lastname LIKE %:lastname) AND " +
             "(:registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
             "(:status is null or c.status.id = :status) AND " +
