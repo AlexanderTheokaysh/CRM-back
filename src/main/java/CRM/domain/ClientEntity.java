@@ -60,6 +60,9 @@ public class ClientEntity {
     @Column(name = "trades")
     private String trades;
 
+    @Column(name = "ftd_agent")
+    private String ftdAgent;
+
     @Column(name = "account")
     private String account;
 
