@@ -7,25 +7,21 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "TEAMS")
-public class TeamEntity {
-
+@Table(name = "DESKS")
+public class DeskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
     @JoinColumn(name = "employee_id")
-    private EmployeeEntity leader;
+    private EmployeeEntity deskManager;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany
     @JoinColumn(name = "TEAM_ID")
-    private List<EmployeeEntity> teamMembers;
-
-    @ManyToOne
-    private DeskEntity desk;
+    private List<TeamEntity> teams;
 
 }

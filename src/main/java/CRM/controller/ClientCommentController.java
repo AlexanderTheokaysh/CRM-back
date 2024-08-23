@@ -26,7 +26,7 @@ public class ClientCommentController {
         return ResponseEntity.ok(comment);
     }
 
-    @PostMapping("get")
+    @GetMapping("get")
     public ResponseEntity<List<ClientCommentEntity>> get(@RequestParam Long id) {
         return ResponseEntity.ok(clientCommentService.getClientComments(id));
     }
