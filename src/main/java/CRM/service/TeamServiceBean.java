@@ -23,7 +23,7 @@ public class TeamServiceBean implements TeamService {
 
     @Override
     public TeamEntity get(Long id) {
-        Optional<TeamEntity> optionalTeamEntity = teamRepository.findById(Math.toIntExact(id));
+        Optional<TeamEntity> optionalTeamEntity = teamRepository.findById(id);
         return new TemplateUtil<TeamEntity>().get(optionalTeamEntity);
     }
 
