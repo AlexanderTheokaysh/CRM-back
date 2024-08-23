@@ -45,6 +45,12 @@ public class TeamController {
         return ResponseEntity.ok(team);
     }
 
+    @GetMapping("get")
+    public ResponseEntity<TeamEntity> addNewAgentToTeam(@RequestParam Long id) {
+
+        return ResponseEntity.ok(teamService.get(id));
+    }
+
 //    @PostMapping("remove")
 //    public ResponseEntity<LeadCommentEntity> delete(@RequestBody LeadCommentEntity comment) {
 //        comment = leadCommentService.delete(comment);
