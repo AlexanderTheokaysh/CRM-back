@@ -46,7 +46,7 @@ public class TeamController {
     }
 
     @GetMapping("get")
-    public ResponseEntity<TeamEntity> addNewAgentToTeam(@RequestParam Long id) {
+    public ResponseEntity<TeamEntity> getTeam(@RequestParam Long id) {
 
         return ResponseEntity.ok(teamService.get(id));
     }
