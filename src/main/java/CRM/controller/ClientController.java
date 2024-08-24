@@ -53,6 +53,13 @@ public class ClientController {
     }
 
 
+    @GetMapping("getCountriesFromDB")
+    @CrossOrigin
+    public ResponseEntity<List<String>> getCountries() {
+        return ResponseEntity.ok(clientService.getCountries());
+    }
+
+
     @SneakyThrows
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ResponseEntity<Page<ClientEntity>> page(@RequestParam(required = false) String name,

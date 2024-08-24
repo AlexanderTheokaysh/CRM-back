@@ -3,6 +3,7 @@ package CRM.service;
 import CRM.domain.ClientEntity;
 import CRM.domain.EmployeeEntity;
 import CRM.domain.UserEntity;
+import CRM.dto.CountriesDTO;
 import CRM.dto.LoanSearchQuery;
 import CRM.repository.ClientRepository;
 import CRM.repository.UserRepository;
@@ -58,6 +59,11 @@ public class ClientServiceBean implements ClientService {
     @Override
     public ClientEntity edit(ClientEntity entity) {
         return clientRepository.save(entity);
+    }
+
+   @Override
+    public List<String> getCountries() {
+        return clientRepository.getCountries();
     }
 
     @Override
