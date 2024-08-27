@@ -3,7 +3,7 @@ package CRM.service;
 import CRM.domain.ClientEntity;
 import CRM.domain.EmployeeEntity;
 import CRM.domain.UserEntity;
-import CRM.dto.CountriesDTO;
+import CRM.dto.ExcelRowDTO;
 import CRM.dto.LoanSearchQuery;
 import CRM.repository.ClientRepository;
 import CRM.repository.UserRepository;
@@ -62,7 +62,11 @@ public class ClientServiceBean implements ClientService {
     }
 
    @Override
-    public List<String> getCountries() {
+    public List<List<String>> getCountries() {
+
+//       List<String> countries = clientRepository.getCountries();
+       ExcelRowDTO excelRowDTO = new ExcelRowDTO();
+
         return clientRepository.getCountries();
     }
 

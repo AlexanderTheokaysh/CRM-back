@@ -55,7 +55,7 @@ public class ClientController {
 
     @GetMapping("getCountriesFromDB")
     @CrossOrigin
-    public ResponseEntity<List<String>> getCountries() {
+    public ResponseEntity<List<List<String>>> getCountries() {
         return ResponseEntity.ok(clientService.getCountries());
     }
 

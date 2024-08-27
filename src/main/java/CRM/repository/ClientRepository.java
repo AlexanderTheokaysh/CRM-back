@@ -45,7 +45,7 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
 
 
     @Query("Select distinct c.country, c.countryCode from ClientEntity c")
-    List<String> getCountries();
+    List<List<String>> getCountries();
 
     Optional<ClientEntity> findClientEntityById(Long id);
 

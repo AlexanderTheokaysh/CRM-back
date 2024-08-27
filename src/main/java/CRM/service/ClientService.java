@@ -17,7 +17,7 @@ public interface ClientService {
 
     ClientEntity edit(ClientEntity client);
 
-    List<String> getCountries();
+    List<List<String>> getCountries();
 
     Page<ClientEntity> page(String name,
                             String lastname,
