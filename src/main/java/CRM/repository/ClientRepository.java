@@ -44,7 +44,7 @@ public interface ClientRepository extends PagingAndSortingRepository<ClientEntit
                                    Pageable paging);
 
 
-    @Query("Select DISTINCT(c.country)from ClientEntity c")
+    @Query("Select distinct c.country, c.countryCode from ClientEntity c")
     List<String> getCountries();
 
     Optional<ClientEntity> findClientEntityById(Long id);
