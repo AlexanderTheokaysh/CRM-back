@@ -66,7 +66,7 @@ public class ClientServiceBean implements ClientService {
 
 //       List<String> countries = clientRepository.getCountries();
        ExcelRowDTO excelRowDTO = new ExcelRowDTO();
-
+       
         return clientRepository.getCountries();
     }
 

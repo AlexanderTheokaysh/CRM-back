@@ -39,7 +39,10 @@ public class ClientCommentController {
     }
 
     @GetMapping("remove")
-    public void delete(@RequestParam Long id) {clientCommentService.delete(clientCommentService.get(id));}
+    public String delete(@RequestParam Long id) {
+        clientCommentService.delete(id);
+        return "success";
+    }
 
 
 }

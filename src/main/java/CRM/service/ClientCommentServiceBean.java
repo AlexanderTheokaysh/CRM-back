@@ -3,7 +3,6 @@ package CRM.service;
 import CRM.domain.ClientCommentEntity;
 import CRM.repository.ClientCommentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientCommentServiceBean implements ClientCommentService {
 
-    @Autowired
-    ClientCommentRepository clientCommentRepository;
+    private final ClientCommentRepository clientCommentRepository;
+    ClientCommentService clientCommentService;
 
     @Override
-    public ClientCommentEntity get(Long id) {
-        return null;
+    public Long get(Long id) {
+        return clientCommentService.get(id);
     }
 
     @Override
@@ -27,9 +26,10 @@ public class ClientCommentServiceBean implements ClientCommentService {
     }
 
     @Override
-    public ClientCommentEntity delete(ClientCommentEntity entity) {
-        clientCommentRepository.deleteById(entity.getId());
-        return entity;
+    public String delete(Long id) {
+        clientCommentRepository.deleteById(id);
+
+        return "success";
     }
 
     @Override

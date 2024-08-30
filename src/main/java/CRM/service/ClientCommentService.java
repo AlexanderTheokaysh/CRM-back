@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface ClientCommentService {
 
-    ClientCommentEntity get(Long id);
+    Long get(Long id);
 
     ClientCommentEntity edit(ClientCommentEntity entity);
 
-    ClientCommentEntity delete(ClientCommentEntity entity);
+    String delete(Long id);
 
     List<ClientCommentEntity> list();
 
