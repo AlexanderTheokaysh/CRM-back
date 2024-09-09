@@ -25,7 +25,7 @@ public class TeamEntity {
     @JoinColumn(name = "TEAM_ID")
     private List<EmployeeEntity> teamMembers;
 
-    @ManyToOne
-    private DeskEntity desk;
+    @Column(name = "DESK_ID")
+    private Long deskId;
 
 }

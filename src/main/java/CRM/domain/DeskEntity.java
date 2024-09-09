@@ -21,7 +21,6 @@ public class DeskEntity {
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name = "DESK_ID")
     private List<TeamEntity> teams;
-
 }
