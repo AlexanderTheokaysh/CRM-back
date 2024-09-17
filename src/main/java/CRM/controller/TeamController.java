@@ -1,6 +1,5 @@
 package CRM.controller;
 
-import CRM.domain.EmployeeEntity;
 import CRM.domain.TeamEntity;
 import CRM.service.EmployeeService;
 import CRM.service.TeamService;
@@ -36,12 +35,7 @@ public class TeamController {
     @GetMapping("agentToTeam")
     public ResponseEntity<TeamEntity> addNewAgentToTeam(@RequestParam Long teamId,
                                                         @RequestParam Long agentId) {
-
-        TeamEntity team = teamService.get(teamId);
-        EmployeeEntity employee = employeeService.get(agentId);
-        employee.setTeamId(teamId);
-        employeeService.edit(employee);
-
+        TeamEntity team = teamService.addAgentToTeam(teamId, agentId);
         return ResponseEntity.ok(team);
     }
 

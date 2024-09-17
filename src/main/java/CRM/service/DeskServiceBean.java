@@ -1,9 +1,10 @@
 package CRM.service;
 
 import CRM.domain.DeskEntity;
+import CRM.domain.TeamEntity;
 import CRM.repository.DeskRepository;
 import CRM.utils.TemplateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -12,15 +13,24 @@ import java.util.Optional;
 
 @Service
 @NotNull
+@RequiredArgsConstructor
 public class DeskServiceBean implements DeskService {
 
-    @Autowired
-    DeskRepository deskRepository;
+    private final DeskRepository deskRepository;
+    private final TeamService teamService;
+
 
     @Override
     public DeskEntity add(DeskEntity deskEntity) {
         return deskRepository.save(deskEntity);
+    }
 
+    @Override
+    public DeskEntity addTeamToDesk(Long deskId, Long teamId) {
+        DeskEntity desk = this.get(deskId);
+        TeamEntity team = teamService.get(teamId);
+        team.setDeskId(deskId);
+        return deskRepository.save(desk);
     }
 
     @Override

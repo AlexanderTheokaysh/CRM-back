@@ -34,7 +34,8 @@ public class UserServiceBean implements UserService {
 
     @Override
     public List<UserEntity> list() {
-        return null;
+        Iterable<UserEntity> iterableEmployeeEntities = userRepository.findAll();
+        return new TemplateUtil<UserEntity>().list(iterableEmployeeEntities);
     }
 
     @Override

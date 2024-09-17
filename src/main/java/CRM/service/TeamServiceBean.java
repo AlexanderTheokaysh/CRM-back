@@ -15,10 +15,23 @@ import java.util.Optional;
 public class TeamServiceBean implements TeamService {
 
     private final TeamRepository teamRepository;
+    private final EmployeeService employeeService;
 
     @Override
     public TeamEntity add(TeamEntity entity) {
         return teamRepository.save(entity);
+
+    }
+
+    @Override
+    public TeamEntity addAgentToTeam(Long teamId, Long agentId) {
+
+        TeamEntity team = this.get(teamId);
+        EmployeeEntity employee = employeeService.get(agentId);
+        employee.setTeamId(teamId);
+        employeeService.edit(employee);
+
+        return team;
     }
 
     @Override

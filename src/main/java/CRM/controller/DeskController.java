@@ -36,6 +36,12 @@ public class DeskController {
         return ResponseEntity.ok(deskService.get(id));
     }
 
+    @GetMapping("addTeamToDesk")
+    public ResponseEntity<DeskEntity> getDesk(@RequestParam Long deskId, @RequestParam Long teamId) {
+        DeskEntity desk = deskService.addTeamToDesk(deskId, teamId);
+        return ResponseEntity.ok(desk);
+    }
+
 //    @PostMapping("remove")
 //    public ResponseEntity<LeadCommentEntity> delete(@RequestBody LeadCommentEntity comment) {
 //        comment = leadCommentService.delete(comment);

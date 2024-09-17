@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -26,6 +27,13 @@ public class UserController {
     public ResponseEntity<UserEntity> get(@RequestParam Long userId) {
         UserEntity userEntity = userService.get(userId);
         return new ResponseEntity<>(userEntity, HttpStatus.OK);
+    }
+
+
+    @GetMapping("list")
+    public ResponseEntity<List<UserEntity>> list() {
+        List<UserEntity> userEntities = userService.list();
+        return new ResponseEntity<>(userEntities, HttpStatus.OK);
     }
 
 

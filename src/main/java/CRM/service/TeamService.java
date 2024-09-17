@@ -10,6 +10,8 @@ public interface TeamService {
 
     TeamEntity add(TeamEntity teamEntity);
 
+    TeamEntity addAgentToTeam(Long teamId, Long agentId);
+
     TeamEntity get(Long id);
 
     TeamEntity addNewMember(TeamEntity team, EmployeeEntity employee);
