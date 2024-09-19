@@ -1,5 +1,6 @@
 package CRM.controller;
 
+import CRM.domain.EmployeeEntity;
 import CRM.domain.TeamEntity;
 import CRM.service.EmployeeService;
 import CRM.service.TeamService;
@@ -32,12 +33,28 @@ public class TeamController {
         return ResponseEntity.ok(teamService.list());
     }
 
-    @GetMapping("agentToTeam")
+    @PostMapping("edit")
+    public ResponseEntity<TeamEntity> edit(@RequestBody TeamEntity team) {
+        TeamEntity oldTeam = teamService.get(team.getId());
+        team.setTeamMembers(oldTeam.getTeamMembers());
+        team = teamService.add(team);
+        return ResponseEntity.ok(team);
+    }
+
+    @GetMapping("addMember")
     public ResponseEntity<TeamEntity> addNewAgentToTeam(@RequestParam Long teamId,
                                                         @RequestParam Long agentId) {
         TeamEntity team = teamService.addAgentToTeam(teamId, agentId);
         return ResponseEntity.ok(team);
     }
+
+    @GetMapping("removeMember")
+    public ResponseEntity<EmployeeEntity> removeMember(@RequestParam Long userId) {
+        EmployeeEntity emp = employeeService.get(userId);
+        emp.setTeamId(null);
+        return ResponseEntity.ok(emp);
+    }
+
 
     @GetMapping("get")
     public ResponseEntity<TeamEntity> getTeam(@RequestParam Long id) {
