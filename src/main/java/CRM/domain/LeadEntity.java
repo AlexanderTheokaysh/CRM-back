@@ -52,6 +52,10 @@ public class LeadEntity {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "country_code")
+    private String countryCode;
+
+
     @ManyToOne
     private EmployeeEntity assignedTo;
 
@@ -66,4 +70,15 @@ public class LeadEntity {
 
     @ManyToOne
     private StatusEntity status;
+
+    @Column(name = "account")
+    private String account;
+
+    @Column(name = "personal_data")
+    private String personalData;
+
+
+    @Column(name = "last_online")
+    private Date lastOnline;
+
 }

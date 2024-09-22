@@ -15,9 +15,7 @@ import java.util.List;
 @RequestMapping("team")
 @Slf4j
 @RequiredArgsConstructor
-
 public class TeamController {
-
 
     private final TeamService teamService;
     private final EmployeeService employeeService;
@@ -61,12 +59,4 @@ public class TeamController {
 
         return ResponseEntity.ok(teamService.get(id));
     }
-
-//    @PostMapping("remove")
-//    public ResponseEntity<LeadCommentEntity> delete(@RequestBody LeadCommentEntity comment) {
-//        comment = leadCommentService.delete(comment);
-//        return ResponseEntity.ok(comment);
-//    }
-
-
 }

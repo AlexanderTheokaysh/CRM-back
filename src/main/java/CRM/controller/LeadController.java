@@ -6,6 +6,7 @@ import CRM.service.EmployeeService;
 import CRM.service.LeadCommentService;
 import CRM.service.LeadService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,11 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("lead")
-@Slf4j
 @RequiredArgsConstructor
 public class LeadController {
 
@@ -60,10 +62,55 @@ public class LeadController {
 
     }
 
+    @GetMapping("getCountriesFromDB")
+    @CrossOrigin
+    public ResponseEntity<List<List<String>>> getCountries() {
+        return ResponseEntity.ok(leadService.getCountries());
+    }
 
+
+
+    @SneakyThrows
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ResponseEntity<Page<LeadEntity>> page(Integer limit, Integer start) {
-        Page<LeadEntity> leadEntities = leadService.page(start, limit);
+    public ResponseEntity<Page<LeadEntity>> page(@RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) String lastname,
+                                                   @RequestParam(required = false) String uid,
+                                                   @RequestParam(required = false) String phone,
+                                                   @RequestParam(required = false) String mail,
+                                                   @RequestParam(required = false) String affiliation,
+                                                   @RequestParam(required = false) String regDateFrom,
+                                                   @RequestParam(required = false) String regDateTo,
+                                                   @RequestParam(required = false) Integer status,
+                                                   @RequestParam(required = false) Integer assignedAgent,
+                                                   @RequestParam(required = false) String gender,
+                                                   @RequestParam(required = false) String country,
+                                                   @RequestParam(required = false) Integer team,
+                                                   Integer limit, Integer start) {
+
+        Long convStatus = null;
+        Long convAssignedAgent = null;
+        Long convTeam = null;
+        Date registerDateFrom = null;
+        Date registerDateTo = null;
+
+        if (status != null) {
+            convStatus = Long.valueOf(status);
+        }
+        if (assignedAgent != null) {
+            convAssignedAgent = Long.valueOf(assignedAgent);
+        }
+        if (team != null) {
+            convTeam = Long.valueOf(team);
+        }
+        if (regDateFrom != null) {
+            registerDateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(regDateFrom);
+        }
+        if (regDateTo != null) {
+            registerDateTo = new SimpleDateFormat("dd/MM/yyyy").parse(regDateTo);
+
+        }
+
+        Page<LeadEntity> leadEntities = leadService.page(name, lastname, uid, phone, mail, affiliation, registerDateFrom, registerDateTo, convStatus, convAssignedAgent, gender, country, convTeam, start, limit);
         return ResponseEntity.ok(leadEntities);
     }
 }

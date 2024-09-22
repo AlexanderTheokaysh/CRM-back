@@ -1,34 +1,38 @@
 package CRM.service;
 
 import CRM.domain.LeadEntity;
-import CRM.dto.LoanSearchQuery;
 import org.springframework.data.domain.Page;
 
-import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 public interface LeadService {
 
     LeadEntity get(Long id);
 
-    LeadEntity add(LeadEntity lead);
+    LeadEntity add(LeadEntity client);
 
-    LeadEntity edit(LeadEntity lead);
 
-    Page<LeadEntity> page(Integer start,
-                          Integer limit);
+    LeadEntity edit(LeadEntity client);
 
-    LoanSearchQuery getAssignRequestLoans(Integer start,
-                                          Integer limit,
-                                          String id,
-                                          String assignRequestReason,
-                                          String creditor,
-                                          String debtor,
-                                          String debtorIdentificator,
-                                          String assignedAgent,
-                                          BigDecimal amount,
-                                          Boolean nullified,
-                                          Boolean nullificationRequest,
-                                          Boolean archived);
+    List<List<String>> getCountries();
+
+    Page<LeadEntity> page(String name,
+                            String lastname,
+                            String uid,
+                            String phone,
+                            String mail,
+                            String affiliation,
+                            Date registerDateFrom,
+                            Date registerDateTo,
+                            Long status,
+                            Long assignedAgent,
+                            String gender,
+                            String country,
+                            Long team,
+                            Integer start,
+                            Integer limit);
+
 
 //    LoanSearchQuery getArchive(Integer start,
 //                               Integer limit,
