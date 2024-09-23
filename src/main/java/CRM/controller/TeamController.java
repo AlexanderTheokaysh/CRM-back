@@ -50,6 +50,7 @@ public class TeamController {
     public ResponseEntity<EmployeeEntity> removeMember(@RequestParam Long userId) {
         EmployeeEntity emp = employeeService.get(userId);
         emp.setTeamId(null);
+        emp = employeeService.edit(emp);
         return ResponseEntity.ok(emp);
     }
 

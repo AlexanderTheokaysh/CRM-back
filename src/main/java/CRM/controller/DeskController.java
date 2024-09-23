@@ -31,7 +31,7 @@ public class DeskController {
     public ResponseEntity<DeskEntity> edit(@RequestBody DeskEntity desk) {
         DeskEntity oldDesk = deskService.get(desk.getId());
         desk.setTeams(oldDesk.getTeams());
-        desk = deskService.add(desk);
+        desk = deskService.edit(desk);
         return ResponseEntity.ok(desk);
     }
 
@@ -45,6 +45,7 @@ public class DeskController {
     public ResponseEntity<TeamEntity> removeMember(@RequestParam Long teamId) {
         TeamEntity team = teamService.get(teamId);
         team.setDeskId(null);
+        team = teamService.edit(team);
         return ResponseEntity.ok(team);
     }
 

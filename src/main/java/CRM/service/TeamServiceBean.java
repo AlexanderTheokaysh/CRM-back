@@ -24,6 +24,12 @@ public class TeamServiceBean implements TeamService {
     }
 
     @Override
+    public TeamEntity edit(TeamEntity entity) {
+        return teamRepository.save(entity);
+
+    }
+
+    @Override
     public TeamEntity addAgentToTeam(Long teamId, Long agentId) {
 
         TeamEntity team = this.get(teamId);
