@@ -29,7 +29,7 @@ public class UserServiceBean implements UserService {
 
     @Override
     public UserEntity edit(UserEntity entity) {
-        return null;
+        return userRepository.save(entity);
     }
 
     @Override
