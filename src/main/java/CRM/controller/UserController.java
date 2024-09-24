@@ -67,4 +67,27 @@ public class UserController {
     }
 
 
+    @GetMapping("edit")
+    public ResponseEntity<UserEntity> edit(@RequestParam Long userId,
+                                           @RequestParam String name,
+                                           @RequestParam String lastname,
+                                           @RequestParam String username,
+                                           @RequestParam String mail,
+                                           @RequestParam String password) {
+
+
+        UserEntity editingUser = userService.get(userId);
+
+        editingUser.getEmployeeEntity().setFirstName(name);
+        editingUser.getEmployeeEntity().setLastName(lastname);
+        editingUser.getEmployeeEntity().setEmail(mail);
+        editingUser.setPassword(password);
+        editingUser.setUsername(username);
+
+        editingUser = userService.edit(editingUser);
+
+        return new ResponseEntity<>(editingUser, HttpStatus.OK);
+    }
+
+
 }
