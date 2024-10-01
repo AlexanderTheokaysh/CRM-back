@@ -27,10 +27,8 @@ public class LoginServiceBean implements UserDetailsService {
 
         UserEntity userEntity = new TemplateUtil<UserEntity>().get(optionalUserEntity);
 
-        UserDetails user = User.withUsername(userEntity.getUsername())
+        return User.withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .authorities("ADMIN").build();
-
-        return user;
     }
 }

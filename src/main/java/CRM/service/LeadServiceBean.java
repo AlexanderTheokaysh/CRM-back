@@ -52,8 +52,8 @@ public class LeadServiceBean implements LeadService {
 
 
     @Override
-    public LeadEntity get(Long clientId) {
-        Optional<LeadEntity> optionalLeadEntity = leadRepository.findLeadEntityById(clientId);
+    public LeadEntity get(Long leadId) {
+        Optional<LeadEntity> optionalLeadEntity = leadRepository.findLeadEntityById(leadId);
         return new TemplateUtil<LeadEntity>().get(optionalLeadEntity);
     }
 

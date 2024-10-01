@@ -22,8 +22,7 @@ public class UserServiceBean implements UserService {
     }
 
     public UserEntity getUserByUsername(String username) {
-        UserEntity userEntity = userRepository.findByUsername(username);
-        return userEntity;
+        return userRepository.findByUsername(username);
     }
 
 

@@ -21,6 +21,12 @@ public class TeamEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "language")
+    private String language;
+
     @OneToMany
     @JoinColumn(name = "TEAM_ID")
     private List<EmployeeEntity> teamMembers;

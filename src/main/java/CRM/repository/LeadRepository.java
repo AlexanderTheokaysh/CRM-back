@@ -13,20 +13,20 @@ import java.util.Optional;
 public interface LeadRepository extends JpaRepository<LeadEntity, Long> {
 
 
-    @Query("SELECT c FROM ClientEntity c left join " +
-            "StatusEntity s on c.status.id = s.id  left join " +
-            "EmployeeEntity e on e.id = c.assignedTo.id where " +
-            "(:name IS null OR c.name LIKE %:name%) AND " +
-            "(:uid is null OR c.uid = :uid) AND " +
-            "(:phone is null OR c.phone LIKE %:phone) AND " +
-            "(:mail is null OR c.email LIKE %:mail%) AND " +
-            "(:affiliation is null OR c.affiliation LIKE %:affiliation%) AND " +
-            "(:lastname IS NULL OR c.lastname LIKE %:lastname) AND " +
-            "(:registerDateFrom IS NULL OR c.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
-            "(:status is null or c.status.id = :status) AND " +
+    @Query("SELECT l FROM LeadEntity l left join " +
+            "StatusEntity s on l.status.id = s.id  left join " +
+            "EmployeeEntity e on e.id = l.assignedTo.id where " +
+            "(:name IS null OR l.name LIKE %:name%) AND " +
+            "(:uid is null OR l.uid = :uid) AND " +
+            "(:phone is null OR l.phone LIKE %:phone) AND " +
+            "(:mail is null OR l.email LIKE %:mail%) AND " +
+            "(:affiliation is null OR l.affiliation LIKE %:affiliation%) AND " +
+            "(:lastname IS NULL OR l.lastname LIKE %:lastname) AND " +
+            "(:registerDateFrom IS NULL OR l.registerDate BETWEEN :registerDateFrom AND :registerDateTo) AND " +
+            "(:status is null or l.status.id = :status) AND " +
             "(:assignedAgent is null or e.id = :assignedAgent) AND " +
-            "(:gender is null or c.gender = :gender) AND " +
-            "(:country is null or c.country = :country) AND " +
+            "(:gender is null or l.gender = :gender) AND " +
+            "(:country is null or l.country = :country) AND " +
             "(:team is null or e.teamId = :team)")
     Page<LeadEntity> findLeads(String name,
                                    String uid,
