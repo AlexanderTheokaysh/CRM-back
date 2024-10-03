@@ -10,7 +10,9 @@ public interface DeskService {
 
     DeskEntity add(DeskEntity deskEntity);
 
-    DeskEntity addTeamToDesk(Long deskId, Long teamId);
+    DeskEntity addTeamToDesk(Long deskId, Long employeeId);
+
+    DeskEntity addManagerToDesk(Long deskId, Long employeeId);
 
     DeskEntity edit(DeskEntity entity);
 

@@ -13,9 +13,9 @@ public class DeskEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "employee_id")
-    private EmployeeEntity deskManager;
+    private List<EmployeeEntity> deskManagers;
 
     @Column(name = "name")
     private String name;

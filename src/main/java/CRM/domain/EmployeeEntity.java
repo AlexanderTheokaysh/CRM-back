@@ -34,4 +34,6 @@ public class EmployeeEntity {
     @Column(name = "TEAM_ID")
     private Long teamId;
 
+    @Column(name = "DESK_ID")
+    private Long managerForDeskId;
 }

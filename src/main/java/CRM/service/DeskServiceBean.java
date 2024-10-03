@@ -1,6 +1,7 @@
 package CRM.service;
 
 import CRM.domain.DeskEntity;
+import CRM.domain.EmployeeEntity;
 import CRM.domain.TeamEntity;
 import CRM.repository.DeskRepository;
 import CRM.utils.TemplateUtil;
@@ -18,6 +19,7 @@ public class DeskServiceBean implements DeskService {
 
     private final DeskRepository deskRepository;
     private final TeamService teamService;
+    private final EmployeeService employeeService;
 
 
     @Override
@@ -30,6 +32,16 @@ public class DeskServiceBean implements DeskService {
         DeskEntity desk = this.get(deskId);
         TeamEntity team = teamService.get(teamId);
         team.setDeskId(deskId);
+        return deskRepository.save(desk);
+    }
+
+    @Override
+    public DeskEntity addManagerToDesk(Long deskId, Long employeeId) {
+        DeskEntity desk = this.get(deskId);
+        EmployeeEntity employee = employeeService.get(employeeId);
+
+        employee.setManagerForDeskId(deskId);
+
         return deskRepository.save(desk);
     }
 
